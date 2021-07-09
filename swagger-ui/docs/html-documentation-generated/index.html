@@ -1,0 +1,2993 @@
+<!doctype html>
+<html>
+  <head>
+    <title>IDS Connector API</title>
+    <style type="text/css">
+      body {
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+
+    </style>
+  </head>
+  <body>
+  <h1>IDS Connector API</h1>
+    <div class="app-desc"><p>This is the administrative REST API of the IDS Connector API.</p>
+<p>The API provides an administrative interface to manage the IDS Connector at runtime
+and is used by the default administration dashboard (&quot;web console&quot;).</p>
+</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 5.0.0</div>
+    <div class="app-desc">BasePath:/cxf/api/v1</div>
+    <div class="license-info">Apache 2.0</div>
+    <div class="license-url">http://www.apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+    <ol>
+      <li>OAuth AuthorizationUrl:TokenUrl:http://localhost:8080/cxf/api/v1/user/login</li>
+    </ol>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#Applications">Applications</a></h4>
+  <ul>
+  <li><a href="#getCml"><code><span class="http-method">get</span> /app/cml_version</code></a></li>
+  <li><a href="#install"><code><span class="http-method">post</span> /app/install</code></a></li>
+  <li><a href="#list"><code><span class="http-method">get</span> /app/list</code></a></li>
+  <li><a href="#search"><code><span class="http-method">post</span> /app/search</code></a></li>
+  <li><a href="#start"><code><span class="http-method">get</span> /app/start/{containerId}</code></a></li>
+  <li><a href="#start_1"><code><span class="http-method">get</span> /app/start/{containerId}/{key}</code></a></li>
+  <li><a href="#stop"><code><span class="http-method">get</span> /app/stop/{containerId}</code></a></li>
+  <li><a href="#wipe"><code><span class="http-method">get</span> /app/wipe</code></a></li>
+  </ul>
+  <h4><a href="#ConnectorConfiguration">ConnectorConfiguration</a></h4>
+  <ul>
+  <li><a href="#get"><code><span class="http-method">get</span> /config/connectorConfig</code></a></li>
+  <li><a href="#getAllConnectionConfigurations"><code><span class="http-method">get</span> /config/connectionConfigs</code></a></li>
+  <li><a href="#getConnectionConfigurations"><code><span class="http-method">get</span> /config/connectionConfigs/{con}</code></a></li>
+  <li><a href="#set"><code><span class="http-method">post</span> /config/connectorConfig</code></a></li>
+  <li><a href="#setConnectionConfigurations"><code><span class="http-method">post</span> /config/connectionConfigs/{con}</code></a></li>
+  </ul>
+  <h4><a href="#IDSCPConnections">IDSCPConnections</a></h4>
+  <ul>
+  <li><a href="#getAvailableEndpoints"><code><span class="http-method">get</span> /connections/endpoints</code></a></li>
+  <li><a href="#getIncoming"><code><span class="http-method">get</span> /connections/incoming</code></a></li>
+  <li><a href="#getOutgoing"><code><span class="http-method">get</span> /connections/outgoing</code></a></li>
+  </ul>
+  <h4><a href="#IdentitiesAndCertificates">IdentitiesAndCertificates</a></h4>
+  <ul>
+  <li><a href="#createIdentity"><code><span class="http-method">post</span> /certs/create_identity</code></a></li>
+  <li><a href="#deleteCert"><code><span class="http-method">post</span> /certs/delete_cert</code></a></li>
+  <li><a href="#deleteIdentity"><code><span class="http-method">post</span> /certs/delete_identity</code></a></li>
+  <li><a href="#getAcmeCert"><code><span class="http-method">get</span> /certs/acme_renew/{target}</code></a></li>
+  <li><a href="#getAcmeTermsOfService"><code><span class="http-method">get</span> /certs/acme_tos</code></a></li>
+  <li><a href="#installTrustedCert"><code><span class="http-method">post</span> /certs/install_trusted_cert</code></a></li>
+  <li><a href="#listCerts"><code><span class="http-method">get</span> /certs/list_certs</code></a></li>
+  <li><a href="#listIdentities"><code><span class="http-method">get</span> /certs/list_identities</code></a></li>
+  </ul>
+  <h4><a href="#MessageRouting">MessageRouting</a></h4>
+  <ul>
+  <li><a href="#addRoute"><code><span class="http-method">put</span> /routes/add</code></a></li>
+  <li><a href="#get"><code><span class="http-method">get</span> /routes/get/{id}</code></a></li>
+  <li><a href="#getAsString"><code><span class="http-method">get</span> /routes/getAsString/{id}</code></a></li>
+  <li><a href="#getComponents"><code><span class="http-method">get</span> /routes/components</code></a></li>
+  <li><a href="#getMetrics"><code><span class="http-method">get</span> /routes/metrics</code></a></li>
+  <li><a href="#getMetrics_1"><code><span class="http-method">get</span> /routes/metrics/{id}</code></a></li>
+  <li><a href="#getRouteProlog"><code><span class="http-method">get</span> /routes/prolog/{routeId}</code></a></li>
+  <li><a href="#list"><code><span class="http-method">get</span> /routes/list</code></a></li>
+  <li><a href="#listEndpoints"><code><span class="http-method">get</span> /routes/list_endpoints</code></a></li>
+  <li><a href="#saveRoute"><code><span class="http-method">post</span> /routes/save/{id}</code></a></li>
+  <li><a href="#startRoute"><code><span class="http-method">get</span> /routes/startroute/{id}</code></a></li>
+  <li><a href="#stopRoute"><code><span class="http-method">get</span> /routes/stoproute/{id}</code></a></li>
+  <li><a href="#validate"><code><span class="http-method">get</span> /routes/validate/{routeId}</code></a></li>
+  </ul>
+  <h4><a href="#RuntimeMetrics">RuntimeMetrics</a></h4>
+  <ul>
+  <li><a href="#getMetrics"><code><span class="http-method">get</span> /metric/get</code></a></li>
+  </ul>
+  <h4><a href="#SelfDescriptionAndConnectorProfiles">SelfDescriptionAndConnectorProfiles</a></h4>
+  <ul>
+  <li><a href="#getConnectorProfile"><code><span class="http-method">get</span> /settings/connectorProfile</code></a></li>
+  <li><a href="#getSelfInformation"><code><span class="http-method">get</span> /settings/selfInformation</code></a></li>
+  <li><a href="#postConnectorProfile"><code><span class="http-method">post</span> /settings/connectorProfile</code></a></li>
+  <li><a href="#removeSelfInformation"><code><span class="http-method">delete</span> /settings/selfInformation</code></a></li>
+  <li><a href="#setSelfInformation"><code><span class="http-method">post</span> /settings/selfInformation</code></a></li>
+  </ul>
+  <h4><a href="#UsageControlPolicies">UsageControlPolicies</a></h4>
+  <ul>
+  <li><a href="#getPolicyProlog"><code><span class="http-method">get</span> /policies/policyProlog</code></a></li>
+  <li><a href="#install"><code><span class="http-method">post</span> /policies/install</code></a></li>
+  <li><a href="#list"><code><span class="http-method">get</span> /policies/list</code></a></li>
+  </ul>
+  <h4><a href="#UserAuthentication">UserAuthentication</a></h4>
+  <ul>
+  <li><a href="#addUser"><code><span class="http-method">post</span> /user/saveUser</code></a></li>
+  <li><a href="#authenticateUser"><code><span class="http-method">post</span> /user/login</code></a></li>
+  <li><a href="#removeUser"><code><span class="http-method">post</span> /user/removeUser</code></a></li>
+  </ul>
+
+  <h1><a name="Applications">Applications</a></h1>
+  <div class="method"><a name="getCml"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /app/cml_version</code></pre></div>
+    <div class="method-summary">Returns the version of the currently active container management layer (<span class="nickname">getCml</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      map[String, Object]
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "key" : "{}"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="install"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /app/install</code></pre></div>
+    <div class="method-summary">Install an app (<span class="nickname">install</span>)</div>
+    <div class="method-notes">Requests to install an app.</div>
+
+
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#object">object</a> (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; String with imageID </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Boolean
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>true</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    If the app has been requested to be installed. The actual installation takes place asynchronously in the background and will terminate after a timeout of 20 minutes
+        <a href="#Boolean">Boolean</a>
+    <h4 class="field-label">500</h4>
+    <em>Null image</em>: If imageID not given
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="list"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /app/list</code></pre></div>
+    <div class="method-summary">List all applications installed in the connector (<span class="nickname">list</span>)</div>
+    <div class="method-notes">Returns an empty list if no apps are installed</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#ApplicationContainer">ApplicationContainer</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "note" : "note",
+  "signature" : "signature",
+  "interactive" : true,
+  "description" : "description",
+  "imageDigests" : [ "imageDigests", "imageDigests" ],
+  "ports" : [ "ports", "ports" ],
+  "repository" : "{}",
+  "title" : "title",
+  "type" : "type",
+  "platform" : "platform",
+  "network" : "network",
+  "hostname" : "hostname",
+  "logo" : "logo",
+  "categories" : [ "categories", "categories" ],
+  "id" : "id",
+  "owner" : "owner",
+  "image" : "image",
+  "registry" : "registry",
+  "imageId" : "imageId",
+  "created" : "created",
+  "volumes" : [ "{}", "{}" ],
+  "env" : [ {
+    "key" : "{}"
+  }, {
+    "key" : "{}"
+  } ],
+  "restartPolicy" : "restartPolicy",
+  "command" : "command",
+  "labels" : {
+    "key" : "{}"
+  },
+  "uptime" : "uptime",
+  "privileged" : true,
+  "names" : "names",
+  "size" : "size",
+  "name" : "name",
+  "ipAddresses" : [ {
+    "linkLocalAddress" : true,
+    "hostName" : "hostName",
+    "loopbackAddress" : true,
+    "mcsiteLocal" : true,
+    "address" : [ "address", "address" ],
+    "canonicalHostName" : "canonicalHostName",
+    "mcglobal" : true,
+    "mcnodeLocal" : true,
+    "siteLocalAddress" : true,
+    "mclinkLocal" : true,
+    "mcorgLocal" : true,
+    "multicastAddress" : true,
+    "hostAddress" : "hostAddress",
+    "anyLocalAddress" : true
+  }, {
+    "linkLocalAddress" : true,
+    "hostName" : "hostName",
+    "loopbackAddress" : true,
+    "mcsiteLocal" : true,
+    "address" : [ "address", "address" ],
+    "canonicalHostName" : "canonicalHostName",
+    "mcglobal" : true,
+    "mcnodeLocal" : true,
+    "siteLocalAddress" : true,
+    "mclinkLocal" : true,
+    "mcorgLocal" : true,
+    "multicastAddress" : true,
+    "hostAddress" : "hostAddress",
+    "anyLocalAddress" : true
+  } ],
+  "status" : "CREATED"
+}, {
+  "note" : "note",
+  "signature" : "signature",
+  "interactive" : true,
+  "description" : "description",
+  "imageDigests" : [ "imageDigests", "imageDigests" ],
+  "ports" : [ "ports", "ports" ],
+  "repository" : "{}",
+  "title" : "title",
+  "type" : "type",
+  "platform" : "platform",
+  "network" : "network",
+  "hostname" : "hostname",
+  "logo" : "logo",
+  "categories" : [ "categories", "categories" ],
+  "id" : "id",
+  "owner" : "owner",
+  "image" : "image",
+  "registry" : "registry",
+  "imageId" : "imageId",
+  "created" : "created",
+  "volumes" : [ "{}", "{}" ],
+  "env" : [ {
+    "key" : "{}"
+  }, {
+    "key" : "{}"
+  } ],
+  "restartPolicy" : "restartPolicy",
+  "command" : "command",
+  "labels" : {
+    "key" : "{}"
+  },
+  "uptime" : "uptime",
+  "privileged" : true,
+  "names" : "names",
+  "size" : "size",
+  "name" : "name",
+  "ipAddresses" : [ {
+    "linkLocalAddress" : true,
+    "hostName" : "hostName",
+    "loopbackAddress" : true,
+    "mcsiteLocal" : true,
+    "address" : [ "address", "address" ],
+    "canonicalHostName" : "canonicalHostName",
+    "mcglobal" : true,
+    "mcnodeLocal" : true,
+    "siteLocalAddress" : true,
+    "mclinkLocal" : true,
+    "mcorgLocal" : true,
+    "multicastAddress" : true,
+    "hostAddress" : "hostAddress",
+    "anyLocalAddress" : true
+  }, {
+    "linkLocalAddress" : true,
+    "hostName" : "hostName",
+    "loopbackAddress" : true,
+    "mcsiteLocal" : true,
+    "address" : [ "address", "address" ],
+    "canonicalHostName" : "canonicalHostName",
+    "mcglobal" : true,
+    "mcnodeLocal" : true,
+    "siteLocalAddress" : true,
+    "mclinkLocal" : true,
+    "mcorgLocal" : true,
+    "multicastAddress" : true,
+    "hostAddress" : "hostAddress",
+    "anyLocalAddress" : true
+  } ],
+  "status" : "CREATED"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    List of apps
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="search"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /app/search</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">search</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#ApplicationContainer">ApplicationContainer</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "note" : "note",
+  "signature" : "signature",
+  "interactive" : true,
+  "description" : "description",
+  "imageDigests" : [ "imageDigests", "imageDigests" ],
+  "ports" : [ "ports", "ports" ],
+  "repository" : "{}",
+  "title" : "title",
+  "type" : "type",
+  "platform" : "platform",
+  "network" : "network",
+  "hostname" : "hostname",
+  "logo" : "logo",
+  "categories" : [ "categories", "categories" ],
+  "id" : "id",
+  "owner" : "owner",
+  "image" : "image",
+  "registry" : "registry",
+  "imageId" : "imageId",
+  "created" : "created",
+  "volumes" : [ "{}", "{}" ],
+  "env" : [ {
+    "key" : "{}"
+  }, {
+    "key" : "{}"
+  } ],
+  "restartPolicy" : "restartPolicy",
+  "command" : "command",
+  "labels" : {
+    "key" : "{}"
+  },
+  "uptime" : "uptime",
+  "privileged" : true,
+  "names" : "names",
+  "size" : "size",
+  "name" : "name",
+  "ipAddresses" : [ {
+    "linkLocalAddress" : true,
+    "hostName" : "hostName",
+    "loopbackAddress" : true,
+    "mcsiteLocal" : true,
+    "address" : [ "address", "address" ],
+    "canonicalHostName" : "canonicalHostName",
+    "mcglobal" : true,
+    "mcnodeLocal" : true,
+    "siteLocalAddress" : true,
+    "mclinkLocal" : true,
+    "mcorgLocal" : true,
+    "multicastAddress" : true,
+    "hostAddress" : "hostAddress",
+    "anyLocalAddress" : true
+  }, {
+    "linkLocalAddress" : true,
+    "hostName" : "hostName",
+    "loopbackAddress" : true,
+    "mcsiteLocal" : true,
+    "address" : [ "address", "address" ],
+    "canonicalHostName" : "canonicalHostName",
+    "mcglobal" : true,
+    "mcnodeLocal" : true,
+    "siteLocalAddress" : true,
+    "mclinkLocal" : true,
+    "mcorgLocal" : true,
+    "multicastAddress" : true,
+    "hostAddress" : "hostAddress",
+    "anyLocalAddress" : true
+  } ],
+  "status" : "CREATED"
+}, {
+  "note" : "note",
+  "signature" : "signature",
+  "interactive" : true,
+  "description" : "description",
+  "imageDigests" : [ "imageDigests", "imageDigests" ],
+  "ports" : [ "ports", "ports" ],
+  "repository" : "{}",
+  "title" : "title",
+  "type" : "type",
+  "platform" : "platform",
+  "network" : "network",
+  "hostname" : "hostname",
+  "logo" : "logo",
+  "categories" : [ "categories", "categories" ],
+  "id" : "id",
+  "owner" : "owner",
+  "image" : "image",
+  "registry" : "registry",
+  "imageId" : "imageId",
+  "created" : "created",
+  "volumes" : [ "{}", "{}" ],
+  "env" : [ {
+    "key" : "{}"
+  }, {
+    "key" : "{}"
+  } ],
+  "restartPolicy" : "restartPolicy",
+  "command" : "command",
+  "labels" : {
+    "key" : "{}"
+  },
+  "uptime" : "uptime",
+  "privileged" : true,
+  "names" : "names",
+  "size" : "size",
+  "name" : "name",
+  "ipAddresses" : [ {
+    "linkLocalAddress" : true,
+    "hostName" : "hostName",
+    "loopbackAddress" : true,
+    "mcsiteLocal" : true,
+    "address" : [ "address", "address" ],
+    "canonicalHostName" : "canonicalHostName",
+    "mcglobal" : true,
+    "mcnodeLocal" : true,
+    "siteLocalAddress" : true,
+    "mclinkLocal" : true,
+    "mcorgLocal" : true,
+    "multicastAddress" : true,
+    "hostAddress" : "hostAddress",
+    "anyLocalAddress" : true
+  }, {
+    "linkLocalAddress" : true,
+    "hostName" : "hostName",
+    "loopbackAddress" : true,
+    "mcsiteLocal" : true,
+    "address" : [ "address", "address" ],
+    "canonicalHostName" : "canonicalHostName",
+    "mcglobal" : true,
+    "mcnodeLocal" : true,
+    "siteLocalAddress" : true,
+    "mclinkLocal" : true,
+    "mcorgLocal" : true,
+    "multicastAddress" : true,
+    "hostAddress" : "hostAddress",
+    "anyLocalAddress" : true
+  } ],
+  "status" : "CREATED"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="start"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /app/start/{containerId}</code></pre></div>
+    <div class="method-summary">Start an application (<span class="nickname">start</span>)</div>
+    <div class="method-notes">Starting an application may take some time. This method will start the app asynchronously and return immediately. This method starts the latest version of the app.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">containerId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the app to start </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Boolean
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>true</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    true if the app has been requested to be started. false if no container management layer is available
+        <a href="#Boolean">Boolean</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="start_1"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /app/start/{containerId}/{key}</code></pre></div>
+    <div class="method-summary">Start an application (<span class="nickname">start_1</span>)</div>
+    <div class="method-notes">Starting an application may take some time. This method will start the app asynchronously and return immediately. This methods starts a specific version of the app.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">containerId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the app to start </div><div class="param">key (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Key for user token (required for trustX containers) </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Boolean
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>true</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    true if the app has been requested to be started. false if no container management layer is available
+        <a href="#Boolean">Boolean</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="stop"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /app/stop/{containerId}</code></pre></div>
+    <div class="method-summary">Stop an app (<span class="nickname">stop</span>)</div>
+    <div class="method-notes">Stops an application. The application will remain installed and can be re-started later. All temporary data will be lost, however.</div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">containerId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; ID of the app to stop </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Boolean
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>true</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    true if the app has been requested to be stopped. false if no container management layer is available
+        <a href="#Boolean">Boolean</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="wipe"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /app/wipe</code></pre></div>
+    <div class="method-summary">Wipes an app and all its data (<span class="nickname">wipe</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">containerId (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; ID of the app to wipe </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    If the app is being wiped
+        <a href="#String">String</a>
+    <h4 class="field-label">500</h4>
+    <em>No cmld</em> if no container management layer is available
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="ConnectorConfiguration">ConnectorConfiguration</a></h1>
+  <div class="method"><a name="get"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /config/connectorConfig</code></pre></div>
+    <div class="method-summary">Retrieves the current configuration (<span class="nickname">get</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ConnectorConfig">ConnectorConfig</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "tosAcceptWebcon" : true,
+  "keystorePassword" : "keystorePassword",
+  "ttpPort" : 6,
+  "acmeServerWebcon" : "acmeServerWebcon",
+  "ttpHost" : "ttpHost",
+  "keystoreName" : "keystoreName",
+  "brokerUrl" : "brokerUrl",
+  "truststoreName" : "truststoreName",
+  "acmePortWebcon" : 0,
+  "dapsUrl" : "dapsUrl",
+  "appstoreUrl" : "appstoreUrl",
+  "acmeDnsWebcon" : "acmeDnsWebcon",
+  "keystoreAliasName" : "keystoreAliasName"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#ConnectorConfig">ConnectorConfig</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAllConnectionConfigurations"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /config/connectionConfigs</code></pre></div>
+    <div class="method-summary">Retrieves configurations of all connections (<span class="nickname">getAllConnectionConfigurations</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ConnectionSettings">ConnectionSettings</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "requiredSecurityProfile" : "requiredSecurityProfile"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Map of connections and configurations
+        <a href="#ConnectionSettings">ConnectionSettings</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getConnectionConfigurations"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /config/connectionConfigs/{con}</code></pre></div>
+    <div class="method-summary">Sends configuration of a connection (<span class="nickname">getConnectionConfigurations</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">con (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ConnectionSettings">ConnectionSettings</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "requiredSecurityProfile" : "requiredSecurityProfile"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#ConnectionSettings">ConnectionSettings</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="set"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /config/connectorConfig</code></pre></div>
+    <div class="method-summary">Sets the overall configuration of the connector (<span class="nickname">set</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#String">String</a>
+    <h4 class="field-label">500</h4>
+    <em>No valid preferences received</em>: If incorrect configuration parameter is provided
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="setConnectionConfigurations"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /config/connectionConfigs/{con}</code></pre></div>
+    <div class="method-summary">Save connection configuration of a particular connection (<span class="nickname">setConnectionConfigurations</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">con (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">500</h4>
+    <em>No valid connection settings received!</em>: If incorrect connection settings parameter is provided
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="IDSCPConnections">IDSCPConnections</a></h1>
+  <div class="method"><a name="getAvailableEndpoints"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /connections/endpoints</code></pre></div>
+    <div class="method-summary">Returns a list of all endpoints provided by this connector (<span class="nickname">getAvailableEndpoints</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#IDSCPServerEndpoint">IDSCPServerEndpoint</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "endpointIdentifier" : "endpointIdentifier",
+  "port" : "port",
+  "host" : "host",
+  "defaultProtocol" : "defaultProtocol"
+}, {
+  "endpointIdentifier" : "endpointIdentifier",
+  "port" : "port",
+  "host" : "host",
+  "defaultProtocol" : "defaultProtocol"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getIncoming"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /connections/incoming</code></pre></div>
+    <div class="method-summary">Returns a list of all inbound connections (<span class="nickname">getIncoming</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#IDSCPIncomingConnection">IDSCPIncomingConnection</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "metaData" : "metaData",
+  "endpointIdentifier" : "endpointIdentifier",
+  "endpointKey" : "endpointKey",
+  "attestationResult" : {
+    "reason" : "reason",
+    "status" : "FAILED"
+  },
+  "remoteHostName" : "remoteHostName"
+}, {
+  "metaData" : "metaData",
+  "endpointIdentifier" : "endpointIdentifier",
+  "endpointKey" : "endpointKey",
+  "attestationResult" : {
+    "reason" : "reason",
+    "status" : "FAILED"
+  },
+  "remoteHostName" : "remoteHostName"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getOutgoing"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /connections/outgoing</code></pre></div>
+    <div class="method-summary">Returns a list of all outbound connections (<span class="nickname">getOutgoing</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#IDSCPOutgoingConnection">IDSCPOutgoingConnection</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "metaData" : "metaData",
+  "endpointIdentifier" : "endpointIdentifier",
+  "endpointKey" : "endpointKey",
+  "remoteAuthentication" : "remoteAuthentication",
+  "remoteIdentity" : "remoteIdentity",
+  "attestationResult" : {
+    "reason" : "reason",
+    "status" : "FAILED"
+  }
+}, {
+  "metaData" : "metaData",
+  "endpointIdentifier" : "endpointIdentifier",
+  "endpointKey" : "endpointKey",
+  "remoteAuthentication" : "remoteAuthentication",
+  "remoteIdentity" : "remoteIdentity",
+  "attestationResult" : {
+    "reason" : "reason",
+    "status" : "FAILED"
+  }
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="IdentitiesAndCertificates">IdentitiesAndCertificates</a></h1>
+  <div class="method"><a name="createIdentity"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /certs/create_identity</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">createIdentity</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a href="#Identity">Identity</a> (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Specification of the identity to create a key pair for </div>
+
+    </div>  <!-- field-items -->
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteCert"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /certs/delete_cert</code></pre></div>
+    <div class="method-summary">Deletes a trusted certificate (<span class="nickname">deleteCert</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="deleteIdentity"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /certs/delete_identity</code></pre></div>
+    <div class="method-summary">Deletes a public/private key pair (<span class="nickname">deleteIdentity</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAcmeCert"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /certs/acme_renew/{target}</code></pre></div>
+    <div class="method-summary">Starts ACME renewal over X509v3 certificates (<span class="nickname">getAcmeCert</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">target (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Identifier of the component to renew. Currently, the only valid value is <strong>webconsole</strong> </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Boolean
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>true</code></pre>
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#Boolean">Boolean</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAcmeTermsOfService"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /certs/acme_tos</code></pre></div>
+    <div class="method-summary">Retrieves the Terms of Service (tos) of the ACME endpoint (<span class="nickname">getAcmeTermsOfService</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">uri (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; URI to retrieve the TOS from </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#AcmeTermsOfService">AcmeTermsOfService</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "tos" : "tos",
+  "error" : "error",
+  "isUri" : true
+}</code></pre>
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#AcmeTermsOfService">AcmeTermsOfService</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="installTrustedCert"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /certs/install_trusted_cert</code></pre></div>
+    <div class="method-summary">Installs a new trusted public key certificate. (<span class="nickname">installTrustedCert</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>multipart/form-data</code></li>
+    </ul>
+
+
+
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">attachment (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: </div>
+    <pre class="example"><code></code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/html</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="listCerts"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /certs/list_certs</code></pre></div>
+    <div class="method-summary">List installed certificates from trust store. (<span class="nickname">listCerts</span>)</div>
+    <div class="method-notes">Certificates in this list refer to public keys that are trusted by this connector.</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Cert">Cert</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "subjectL" : "subjectL",
+  "file" : "file",
+  "subjectO" : "subjectO",
+  "subjectC" : "subjectC",
+  "subjectS" : "subjectS",
+  "certificate" : "certificate",
+  "alias" : "alias",
+  "subjectAltNames" : [ [ "{}", "{}" ], [ "{}", "{}" ] ],
+  "subjectOU" : "subjectOU",
+  "subjectCN" : "subjectCN"
+}, {
+  "subjectL" : "subjectL",
+  "file" : "file",
+  "subjectO" : "subjectO",
+  "subjectC" : "subjectC",
+  "subjectS" : "subjectS",
+  "certificate" : "certificate",
+  "alias" : "alias",
+  "subjectAltNames" : [ [ "{}", "{}" ], [ "{}", "{}" ] ],
+  "subjectOU" : "subjectOU",
+  "subjectCN" : "subjectCN"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    List of certificates
+        
+    <h4 class="field-label">500</h4>
+    <em>Truststore not found</em>: If no trust store available
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="listIdentities"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /certs/list_identities</code></pre></div>
+    <div class="method-summary">List installed certificates from the private key store. (<span class="nickname">listIdentities</span>)</div>
+    <div class="method-notes">Certificates in this list refer to private keys that can be used as identities by the connector.</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Cert">Cert</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "subjectL" : "subjectL",
+  "file" : "file",
+  "subjectO" : "subjectO",
+  "subjectC" : "subjectC",
+  "subjectS" : "subjectS",
+  "certificate" : "certificate",
+  "alias" : "alias",
+  "subjectAltNames" : [ [ "{}", "{}" ], [ "{}", "{}" ] ],
+  "subjectOU" : "subjectOU",
+  "subjectCN" : "subjectCN"
+}, {
+  "subjectL" : "subjectL",
+  "file" : "file",
+  "subjectO" : "subjectO",
+  "subjectC" : "subjectC",
+  "subjectS" : "subjectS",
+  "certificate" : "certificate",
+  "alias" : "alias",
+  "subjectAltNames" : [ [ "{}", "{}" ], [ "{}", "{}" ] ],
+  "subjectOU" : "subjectOU",
+  "subjectCN" : "subjectCN"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="MessageRouting">MessageRouting</a></h1>
+  <div class="method"><a name="addRoute"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /routes/add</code></pre></div>
+    <div class="method-summary">Adds a new route, provided as Camel XML. (<span class="nickname">addRoute</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Result">Result</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message",
+  "successful" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#Result">Result</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="get"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /routes/get/{id}</code></pre></div>
+    <div class="method-summary">Get a Camel route (<span class="nickname">get</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Route ID </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#RouteObject">RouteObject</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "context" : "context",
+  "dot" : "dot",
+  "description" : "description",
+  "id" : "id",
+  "shortName" : "shortName",
+  "status" : "status",
+  "uptime" : 0
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#RouteObject">RouteObject</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getAsString"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /routes/getAsString/{id}</code></pre></div>
+    <div class="method-summary">Gets an XML representation of a Camel route. (<span class="nickname">getAsString</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash; Route ID </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: </div>
+    <pre class="example"><code></code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getComponents"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /routes/components</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getComponents</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#RouteComponent">RouteComponent</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "description" : "description",
+  "bundle" : "bundle"
+}, {
+  "description" : "description",
+  "bundle" : "bundle"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getMetrics"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /routes/metrics</code></pre></div>
+    <div class="method-summary">Get aggregated runtime metrics of all routes (<span class="nickname">getMetrics</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#RouteMetrics">RouteMetrics</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "maxProcessingTime" : 5,
+  "meanProcessingTime" : 2,
+  "minProcessingTime" : 7,
+  "redeliveries" : 9,
+  "failuresHandled" : 1,
+  "completed" : 0,
+  "failed" : 6,
+  "inflight" : 5
+}</code></pre>
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#RouteMetrics">RouteMetrics</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getMetrics_1"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /routes/metrics/{id}</code></pre></div>
+    <div class="method-summary">Get runtime metrics of a route (<span class="nickname">getMetrics_1</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#RouteMetrics">RouteMetrics</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "maxProcessingTime" : 5,
+  "meanProcessingTime" : 2,
+  "minProcessingTime" : 7,
+  "redeliveries" : 9,
+  "failuresHandled" : 1,
+  "completed" : 0,
+  "failed" : 6,
+  "inflight" : 5
+}</code></pre>
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#RouteMetrics">RouteMetrics</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getRouteProlog"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /routes/prolog/{routeId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getRouteProlog</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">routeId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: </div>
+    <pre class="example"><code></code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="list"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /routes/list</code></pre></div>
+    <div class="method-summary">Returns map from camel context to list of camel routes. (<span class="nickname">list</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#RouteObject">RouteObject</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "context" : "context",
+  "dot" : "dot",
+  "description" : "description",
+  "id" : "id",
+  "shortName" : "shortName",
+  "status" : "status",
+  "uptime" : 0
+}, {
+  "context" : "context",
+  "dot" : "dot",
+  "description" : "description",
+  "id" : "id",
+  "shortName" : "shortName",
+  "status" : "status",
+  "uptime" : 0
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="listEndpoints"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /routes/list_endpoints</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">listEndpoints</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      map[String, String]
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "key" : ""
+}</code></pre>
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="saveRoute"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /routes/save/{id}</code></pre></div>
+    <div class="method-summary">Save changes to a route. (<span class="nickname">saveRoute</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Result">Result</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message",
+  "successful" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#Result">Result</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="startRoute"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /routes/startroute/{id}</code></pre></div>
+    <div class="method-summary">Starts a Camel route. The route will start to process messages. (<span class="nickname">startRoute</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Result">Result</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message",
+  "successful" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#Result">Result</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="stopRoute"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /routes/stoproute/{id}</code></pre></div>
+    <div class="method-summary">Stops a Camel route. The route will remain installed but it will not process any messages. (<span class="nickname">stopRoute</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">id (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#Result">Result</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "message" : "message",
+  "successful" : true
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#Result">Result</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="validate"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /routes/validate/{routeId}</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">validate</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">routeId (required)</div>
+
+      <div class="param-desc"><span class="param-type">Path Parameter</span> &mdash;  </div>
+    </div>  <!-- field-items -->
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ValidationInfo">ValidationInfo</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "valid" : true,
+  "counterExamples" : [ {
+    "explanation" : "explanation",
+    "steps" : [ "steps", "steps" ]
+  }, {
+    "explanation" : "explanation",
+    "steps" : [ "steps", "steps" ]
+  } ]
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#ValidationInfo">ValidationInfo</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="RuntimeMetrics">RuntimeMetrics</a></h1>
+  <div class="method"><a name="getMetrics"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /metric/get</code></pre></div>
+    <div class="method-summary">Returns metrics values (<span class="nickname">getMetrics</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      map[String, String]
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "key" : ""
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Map of metrics values
+        
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="SelfDescriptionAndConnectorProfiles">SelfDescriptionAndConnectorProfiles</a></h1>
+  <div class="method"><a name="getConnectorProfile"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /settings/connectorProfile</code></pre></div>
+    <div class="method-summary">Returns this connector's self-description (&quot;Connector Profile&quot;) (<span class="nickname">getConnectorProfile</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#ConnectorProfile">ConnectorProfile</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  "connectorEntityNames" : [ {
+    "@value" : "@value",
+    "@language" : "@language",
+    "@type" : "@type"
+  }, {
+    "@value" : "@value",
+    "@language" : "@language",
+    "@type" : "@type"
+  } ],
+  "securityProfile" : "BASE_SECURITY_PROFILE",
+  "maintainerUrl" : "http://example.com/aeiou",
+  "connectorUrl" : "http://example.com/aeiou"
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#ConnectorProfile">ConnectorProfile</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="getSelfInformation"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /settings/selfInformation</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">getSelfInformation</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: </div>
+    <pre class="example"><code></code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/ld+json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="postConnectorProfile"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /settings/connectorProfile</code></pre></div>
+    <div class="method-summary">Configure the connector's self-description (&quot;Connector Profile&quot;). (<span class="nickname">postConnectorProfile</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="removeSelfInformation"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /settings/selfInformation</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">removeSelfInformation</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/ld+json</code></li>
+    </ul>
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    successful operation
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="setSelfInformation"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /settings/selfInformation</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">setSelfInformation</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/ld+json</code></li>
+    </ul>
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    successful operation
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="UsageControlPolicies">UsageControlPolicies</a></h1>
+  <div class="method"><a name="getPolicyProlog"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /policies/policyProlog</code></pre></div>
+    <div class="method-summary">Returns the full usage control policy as a Prolog theory (<span class="nickname">getPolicyProlog</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: </div>
+    <pre class="example"><code></code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>text/plain</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="install"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /policies/install</code></pre></div>
+    <div class="method-summary">Installs a new usage control policy as a Prolog theory file (<span class="nickname">install</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>multipart/form-data</code></li>
+    </ul>
+
+
+
+
+    <h3 class="field-label">Form parameters</h3>
+    <div class="field-items">
+      <div class="param">policy_description (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  </div><div class="param">policy_file (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  </div><div class="param">policy_name (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Form Parameter</span> &mdash;  default: default policy </div>
+    </div>  <!-- field-items -->
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      String
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>""</code></pre>
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    successful operation
+        <a href="#String">String</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="list"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /policies/list</code></pre></div>
+    <div class="method-summary">Lists active usage control rules (<span class="nickname">list</span>)</div>
+    <div class="method-notes"></div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      array[array[String]]
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ [ "", "" ], [ "", "" ] ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    List of usage control rules
+        
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="UserAuthentication">UserAuthentication</a></h1>
+  <div class="method"><a name="addUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/saveUser</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">addUser</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    successful operation
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="authenticateUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/login</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">authenticateUser</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    successful operation
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="removeUser"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /user/removeUser</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">removeUser</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+
+
+
+
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">default</h4>
+    successful operation
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
+
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#AcmeTermsOfService"><code>AcmeTermsOfService</code> - </a></li>
+    <li><a href="#ApplicationContainer"><code>ApplicationContainer</code> - </a></li>
+    <li><a href="#Cert"><code>Cert</code> - </a></li>
+    <li><a href="#ConnectionSettings"><code>ConnectionSettings</code> - </a></li>
+    <li><a href="#ConnectorConfig"><code>ConnectorConfig</code> - </a></li>
+    <li><a href="#ConnectorProfile"><code>ConnectorProfile</code> - </a></li>
+    <li><a href="#CounterExample"><code>CounterExample</code> - </a></li>
+    <li><a href="#IDSCPIncomingConnection"><code>IDSCPIncomingConnection</code> - </a></li>
+    <li><a href="#IDSCPOutgoingConnection"><code>IDSCPOutgoingConnection</code> - </a></li>
+    <li><a href="#IDSCPServerEndpoint"><code>IDSCPServerEndpoint</code> - </a></li>
+    <li><a href="#Identity"><code>Identity</code> - </a></li>
+    <li><a href="#InetAddress"><code>InetAddress</code> - </a></li>
+    <li><a href="#RatResult"><code>RatResult</code> - </a></li>
+    <li><a href="#Result"><code>Result</code> - </a></li>
+    <li><a href="#RouteComponent"><code>RouteComponent</code> - </a></li>
+    <li><a href="#RouteMetrics"><code>RouteMetrics</code> - </a></li>
+    <li><a href="#RouteObject"><code>RouteObject</code> - </a></li>
+    <li><a href="#TypedLiteral"><code>TypedLiteral</code> - </a></li>
+    <li><a href="#ValidationInfo"><code>ValidationInfo</code> - </a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a name="AcmeTermsOfService"><code>AcmeTermsOfService</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">error (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">isUri (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">tos (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ApplicationContainer"><code>ApplicationContainer</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">categories (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">command (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">created (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">env (optional)</div><div class="param-desc"><span class="param-type"><a href="#map">array[map[String, Object]]</a></span>  </div>
+<div class="param">hostname (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">image (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">imageDigests (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">imageId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">interactive (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">ipAddresses (optional)</div><div class="param-desc"><span class="param-type"><a href="#InetAddress">array[InetAddress]</a></span>  </div>
+<div class="param">labels (optional)</div><div class="param-desc"><span class="param-type"><a href="#object">map[String, Object]</a></span>  </div>
+<div class="param">logo (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">names (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">network (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">note (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">owner (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">platform (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">ports (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">privileged (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">registry (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">repository (optional)</div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span>  </div>
+<div class="param">restartPolicy (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">signature (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">size (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">CREATED</div><div class="param-enum">RESTARTING</div><div class="param-enum">RUNNING</div><div class="param-enum">REMOVING</div><div class="param-enum">PAUSED</div><div class="param-enum">EXITED</div><div class="param-enum">DEAD</div>
+<div class="param">title (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">uptime (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">volumes (optional)</div><div class="param-desc"><span class="param-type"><a href="#object">array[Object]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Cert"><code>Cert</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">alias (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">certificate (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">file (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">subjectAltNames (optional)</div><div class="param-desc"><span class="param-type"><a href="#array">array[array[Object]]</a></span>  </div>
+<div class="param">subjectC (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">subjectCN (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">subjectL (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">subjectO (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">subjectOU (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">subjectS (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ConnectionSettings"><code>ConnectionSettings</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">requiredSecurityProfile (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ConnectorConfig"><code>ConnectorConfig</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">acmeDnsWebcon (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">acmePortWebcon (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+<div class="param">acmeServerWebcon (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">appstoreUrl (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">brokerUrl (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">dapsUrl (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">keystoreAliasName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">keystoreName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">keystorePassword (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">tosAcceptWebcon (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">truststoreName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">ttpHost (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">ttpPort (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span>  format: int32</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ConnectorProfile"><code>ConnectorProfile</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">connectorEntityNames (optional)</div><div class="param-desc"><span class="param-type"><a href="#TypedLiteral">array[TypedLiteral]</a></span>  </div>
+<div class="param">connectorUrl (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: uri</div>
+<div class="param">maintainerUrl (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  format: uri</div>
+<div class="param">securityProfile (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">BASE_SECURITY_PROFILE</div><div class="param-enum">TRUST_SECURITY_PROFILE</div><div class="param-enum">TRUST_PLUS_SECURITY_PROFILE</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="CounterExample"><code>CounterExample</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">explanation (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">steps (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="IDSCPIncomingConnection"><code>IDSCPIncomingConnection</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">attestationResult (optional)</div><div class="param-desc"><span class="param-type"><a href="#RatResult">RatResult</a></span>  </div>
+<div class="param">endpointIdentifier (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">endpointKey (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">metaData (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">remoteHostName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="IDSCPOutgoingConnection"><code>IDSCPOutgoingConnection</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">attestationResult (optional)</div><div class="param-desc"><span class="param-type"><a href="#RatResult">RatResult</a></span>  </div>
+<div class="param">endpointIdentifier (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">endpointKey (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">metaData (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">remoteAuthentication (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">remoteIdentity (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="IDSCPServerEndpoint"><code>IDSCPServerEndpoint</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">defaultProtocol (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">endpointIdentifier (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">host (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">port (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Identity"><code>Identity</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">c (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">cn (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">l (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">o (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">ou (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">s (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="InetAddress"><code>InetAddress</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">address (optional)</div><div class="param-desc"><span class="param-type"><a href="#ByteArray">array[byte[]]</a></span>  format: byte</div>
+<div class="param">anyLocalAddress (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">canonicalHostName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">hostAddress (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">hostName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">linkLocalAddress (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">loopbackAddress (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">mcglobal (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">mclinkLocal (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">mcnodeLocal (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">mcorgLocal (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">mcsiteLocal (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">multicastAddress (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+<div class="param">siteLocalAddress (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RatResult"><code>RatResult</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">reason (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+        <div class="param-enum-header">Enum:</div>
+        <div class="param-enum">FAILED</div><div class="param-enum">SUCCESS</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Result"><code>Result</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">message (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">successful (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RouteComponent"><code>RouteComponent</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">bundle (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RouteMetrics"><code>RouteMetrics</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">completed (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">failed (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">failuresHandled (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">inflight (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">maxProcessingTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">meanProcessingTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">minProcessingTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+<div class="param">redeliveries (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RouteObject"><code>RouteObject</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">context (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">description (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">dot (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">shortName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">status (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">uptime (optional)</div><div class="param-desc"><span class="param-type"><a href="#long">Long</a></span>  format: int64</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="TypedLiteral"><code>TypedLiteral</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">@language (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">@type (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">@value (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ValidationInfo"><code>ValidationInfo</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">counterExamples (optional)</div><div class="param-desc"><span class="param-type"><a href="#CounterExample">array[CounterExample]</a></span>  </div>
+<div class="param">valid (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>

@@ -1,0 +1,1710 @@
+{
+  "basePath" : "/cxf/api/v1",
+  "definitions" : {
+    "AcmeTermsOfService" : {
+      "type" : "object",
+      "properties" : {
+        "error" : {
+          "type" : "string"
+        },
+        "isUri" : {
+          "readOnly" : true,
+          "type" : "boolean"
+        },
+        "tos" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ApplicationContainer" : {
+      "type" : "object",
+      "properties" : {
+        "categories" : {
+          "items" : {
+            "type" : "string"
+          },
+          "type" : "array"
+        },
+        "command" : {
+          "type" : "string"
+        },
+        "created" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "env" : {
+          "items" : {
+            "additionalProperties" : {
+              "type" : "object"
+            },
+            "type" : "object"
+          },
+          "type" : "array"
+        },
+        "hostname" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "image" : {
+          "type" : "string"
+        },
+        "imageDigests" : {
+          "items" : {
+            "type" : "string"
+          },
+          "type" : "array"
+        },
+        "imageId" : {
+          "type" : "string"
+        },
+        "interactive" : {
+          "type" : "boolean"
+        },
+        "ipAddresses" : {
+          "items" : {
+            "$ref" : "#/definitions/InetAddress"
+          },
+          "type" : "array"
+        },
+        "labels" : {
+          "additionalProperties" : {
+            "type" : "object"
+          },
+          "type" : "object"
+        },
+        "logo" : {
+          "type" : "string"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "names" : {
+          "type" : "string"
+        },
+        "network" : {
+          "type" : "string"
+        },
+        "note" : {
+          "type" : "string"
+        },
+        "owner" : {
+          "type" : "string"
+        },
+        "platform" : {
+          "type" : "string"
+        },
+        "ports" : {
+          "items" : {
+            "type" : "string"
+          },
+          "type" : "array"
+        },
+        "privileged" : {
+          "type" : "boolean"
+        },
+        "registry" : {
+          "type" : "string"
+        },
+        "repository" : {
+          "type" : "object"
+        },
+        "restartPolicy" : {
+          "type" : "string"
+        },
+        "signature" : {
+          "type" : "string"
+        },
+        "size" : {
+          "type" : "string"
+        },
+        "status" : {
+          "enum" : [ "CREATED", "RESTARTING", "RUNNING", "REMOVING", "PAUSED", "EXITED", "DEAD" ],
+          "type" : "string"
+        },
+        "title" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        },
+        "uptime" : {
+          "type" : "string"
+        },
+        "volumes" : {
+          "items" : {
+            "type" : "object"
+          },
+          "type" : "array"
+        }
+      }
+    },
+    "Cert" : {
+      "type" : "object",
+      "properties" : {
+        "alias" : {
+          "type" : "string"
+        },
+        "certificate" : {
+          "type" : "string"
+        },
+        "file" : {
+          "type" : "string"
+        },
+        "subjectAltNames" : {
+          "items" : {
+            "items" : {
+              "type" : "object"
+            },
+            "type" : "array"
+          },
+          "type" : "array"
+        },
+        "subjectC" : {
+          "type" : "string"
+        },
+        "subjectCN" : {
+          "type" : "string"
+        },
+        "subjectL" : {
+          "type" : "string"
+        },
+        "subjectO" : {
+          "type" : "string"
+        },
+        "subjectOU" : {
+          "type" : "string"
+        },
+        "subjectS" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ConnectionSettings" : {
+      "type" : "object",
+      "properties" : {
+        "requiredSecurityProfile" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ConnectorConfig" : {
+      "type" : "object",
+      "properties" : {
+        "acmeDnsWebcon" : {
+          "type" : "string"
+        },
+        "acmePortWebcon" : {
+          "format" : "int32",
+          "type" : "integer"
+        },
+        "acmeServerWebcon" : {
+          "type" : "string"
+        },
+        "appstoreUrl" : {
+          "type" : "string"
+        },
+        "brokerUrl" : {
+          "type" : "string"
+        },
+        "dapsUrl" : {
+          "type" : "string"
+        },
+        "keystoreAliasName" : {
+          "type" : "string"
+        },
+        "keystoreName" : {
+          "type" : "string"
+        },
+        "keystorePassword" : {
+          "type" : "string"
+        },
+        "tosAcceptWebcon" : {
+          "type" : "boolean"
+        },
+        "truststoreName" : {
+          "type" : "string"
+        },
+        "ttpHost" : {
+          "type" : "string"
+        },
+        "ttpPort" : {
+          "format" : "int32",
+          "type" : "integer"
+        }
+      }
+    },
+    "ConnectorProfile" : {
+      "type" : "object",
+      "properties" : {
+        "connectorEntityNames" : {
+          "items" : {
+            "$ref" : "#/definitions/TypedLiteral"
+          },
+          "type" : "array"
+        },
+        "connectorUrl" : {
+          "format" : "uri",
+          "type" : "string"
+        },
+        "maintainerUrl" : {
+          "format" : "uri",
+          "type" : "string"
+        },
+        "securityProfile" : {
+          "enum" : [ "BASE_SECURITY_PROFILE", "TRUST_SECURITY_PROFILE", "TRUST_PLUS_SECURITY_PROFILE" ],
+          "type" : "string"
+        }
+      }
+    },
+    "CounterExample" : {
+      "type" : "object",
+      "properties" : {
+        "explanation" : {
+          "type" : "string"
+        },
+        "steps" : {
+          "items" : {
+            "type" : "string"
+          },
+          "type" : "array"
+        }
+      }
+    },
+    "IDSCPIncomingConnection" : {
+      "type" : "object",
+      "properties" : {
+        "attestationResult" : {
+          "$ref" : "#/definitions/RatResult"
+        },
+        "endpointIdentifier" : {
+          "type" : "string"
+        },
+        "endpointKey" : {
+          "type" : "string"
+        },
+        "metaData" : {
+          "type" : "string"
+        },
+        "remoteHostName" : {
+          "type" : "string"
+        }
+      }
+    },
+    "IDSCPOutgoingConnection" : {
+      "type" : "object",
+      "properties" : {
+        "attestationResult" : {
+          "$ref" : "#/definitions/RatResult"
+        },
+        "endpointIdentifier" : {
+          "type" : "string"
+        },
+        "endpointKey" : {
+          "type" : "string"
+        },
+        "metaData" : {
+          "type" : "string"
+        },
+        "remoteAuthentication" : {
+          "type" : "string"
+        },
+        "remoteIdentity" : {
+          "type" : "string"
+        }
+      }
+    },
+    "IDSCPServerEndpoint" : {
+      "type" : "object",
+      "properties" : {
+        "defaultProtocol" : {
+          "type" : "string"
+        },
+        "endpointIdentifier" : {
+          "type" : "string"
+        },
+        "host" : {
+          "type" : "string"
+        },
+        "port" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Identity" : {
+      "type" : "object",
+      "properties" : {
+        "c" : {
+          "type" : "string"
+        },
+        "cn" : {
+          "type" : "string"
+        },
+        "l" : {
+          "type" : "string"
+        },
+        "o" : {
+          "type" : "string"
+        },
+        "ou" : {
+          "type" : "string"
+        },
+        "s" : {
+          "type" : "string"
+        }
+      }
+    },
+    "InetAddress" : {
+      "type" : "object",
+      "properties" : {
+        "address" : {
+          "items" : {
+            "format" : "byte",
+            "type" : "string"
+          },
+          "type" : "array"
+        },
+        "anyLocalAddress" : {
+          "type" : "boolean"
+        },
+        "canonicalHostName" : {
+          "type" : "string"
+        },
+        "hostAddress" : {
+          "type" : "string"
+        },
+        "hostName" : {
+          "type" : "string"
+        },
+        "linkLocalAddress" : {
+          "type" : "boolean"
+        },
+        "loopbackAddress" : {
+          "type" : "boolean"
+        },
+        "mcglobal" : {
+          "type" : "boolean"
+        },
+        "mclinkLocal" : {
+          "type" : "boolean"
+        },
+        "mcnodeLocal" : {
+          "type" : "boolean"
+        },
+        "mcorgLocal" : {
+          "type" : "boolean"
+        },
+        "mcsiteLocal" : {
+          "type" : "boolean"
+        },
+        "multicastAddress" : {
+          "type" : "boolean"
+        },
+        "siteLocalAddress" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "RatResult" : {
+      "type" : "object",
+      "properties" : {
+        "reason" : {
+          "type" : "string"
+        },
+        "status" : {
+          "enum" : [ "FAILED", "SUCCESS" ],
+          "type" : "string"
+        }
+      }
+    },
+    "Result" : {
+      "type" : "object",
+      "properties" : {
+        "message" : {
+          "type" : "string"
+        },
+        "successful" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "RouteComponent" : {
+      "type" : "object",
+      "properties" : {
+        "bundle" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        }
+      }
+    },
+    "RouteMetrics" : {
+      "type" : "object",
+      "properties" : {
+        "completed" : {
+          "format" : "int64",
+          "type" : "integer"
+        },
+        "failed" : {
+          "format" : "int64",
+          "type" : "integer"
+        },
+        "failuresHandled" : {
+          "format" : "int64",
+          "type" : "integer"
+        },
+        "inflight" : {
+          "format" : "int64",
+          "type" : "integer"
+        },
+        "maxProcessingTime" : {
+          "format" : "int64",
+          "type" : "integer"
+        },
+        "meanProcessingTime" : {
+          "format" : "int64",
+          "type" : "integer"
+        },
+        "minProcessingTime" : {
+          "format" : "int64",
+          "type" : "integer"
+        },
+        "redeliveries" : {
+          "format" : "int64",
+          "type" : "integer"
+        }
+      }
+    },
+    "RouteObject" : {
+      "type" : "object",
+      "properties" : {
+        "context" : {
+          "type" : "string"
+        },
+        "description" : {
+          "type" : "string"
+        },
+        "dot" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "shortName" : {
+          "type" : "string"
+        },
+        "status" : {
+          "type" : "string"
+        },
+        "uptime" : {
+          "format" : "int64",
+          "type" : "integer"
+        }
+      }
+    },
+    "TypedLiteral" : {
+      "type" : "object",
+      "properties" : {
+        "@language" : {
+          "type" : "string"
+        },
+        "@type" : {
+          "type" : "string"
+        },
+        "@value" : {
+          "type" : "string"
+        }
+      }
+    },
+    "ValidationInfo" : {
+      "type" : "object",
+      "properties" : {
+        "counterExamples" : {
+          "items" : {
+            "$ref" : "#/definitions/CounterExample"
+          },
+          "type" : "array"
+        },
+        "valid" : {
+          "type" : "boolean"
+        }
+      }
+    }
+  },
+  "host" : "localhost:8080",
+  "info" : {
+    "description" : "This is the administrative REST API of the IDS Connector API.\n\nThe API provides an administrative interface to manage the IDS Connector at runtime\nand is used by the default administration dashboard (\"web console\").\n",
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "title" : "IDS Connector API",
+    "version" : "5.0.0"
+  },
+  "paths" : {
+    "/app/cml_version" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getCml",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "object"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Returns the version of the currently active container management layer",
+        "tags" : [ "Applications" ]
+      }
+    },
+    "/app/install" : {
+      "post" : {
+        "description" : "Requests to install an app.",
+        "operationId" : "install",
+        "parameters" : [ {
+          "description" : "String with imageID",
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "$ref" : "#/definitions/ApplicationContainer"
+            }
+          }
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "If the app has been requested to be installed. The actual installation takes place asynchronously in the background and will terminate after a timeout of 20 minutes",
+            "schema" : {
+              "type" : "boolean"
+            }
+          },
+          "500" : {
+            "description" : "_Null image_: If imageID not given"
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Install an app",
+        "tags" : [ "Applications" ]
+      }
+    },
+    "/app/list" : {
+      "get" : {
+        "description" : "Returns an empty list if no apps are installed",
+        "operationId" : "list",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "List of apps",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/ApplicationContainer"
+              },
+              "type" : "array"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "List all applications installed in the connector",
+        "tags" : [ "Applications" ]
+      }
+    },
+    "/app/search" : {
+      "post" : {
+        "consumes" : [ "application/json" ],
+        "operationId" : "search",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/ApplicationContainer"
+              },
+              "type" : "array"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "tags" : [ "Applications" ]
+      }
+    },
+    "/app/start/{containerId}" : {
+      "get" : {
+        "description" : "Starting an application may take some time. This method will start the app asynchronously and return immediately. This method starts the latest version of the app.",
+        "operationId" : "start",
+        "parameters" : [ {
+          "name" : "containerId",
+          "in" : "path",
+          "description" : "ID of the app to start",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "true if the app has been requested to be started. false if no container management layer is available",
+            "schema" : {
+              "type" : "boolean"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Start an application",
+        "tags" : [ "Applications" ]
+      }
+    },
+    "/app/start/{containerId}/{key}" : {
+      "get" : {
+        "description" : "Starting an application may take some time. This method will start the app asynchronously and return immediately. This methods starts a specific version of the app.",
+        "operationId" : "start",
+        "parameters" : [ {
+          "name" : "containerId",
+          "in" : "path",
+          "description" : "ID of the app to start",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "key",
+          "in" : "path",
+          "description" : "Key for user token (required for trustX containers)",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "true if the app has been requested to be started. false if no container management layer is available",
+            "schema" : {
+              "type" : "boolean"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Start an application",
+        "tags" : [ "Applications" ]
+      }
+    },
+    "/app/stop/{containerId}" : {
+      "get" : {
+        "description" : "Stops an application. The application will remain installed and can be re-started later. All temporary data will be lost, however.",
+        "operationId" : "stop",
+        "parameters" : [ {
+          "name" : "containerId",
+          "in" : "path",
+          "description" : "ID of the app to stop",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "true if the app has been requested to be stopped. false if no container management layer is available",
+            "schema" : {
+              "type" : "boolean"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Stop an app",
+        "tags" : [ "Applications" ]
+      }
+    },
+    "/app/wipe" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "wipe",
+        "parameters" : [ {
+          "name" : "containerId",
+          "in" : "query",
+          "description" : "ID of the app to wipe",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "If the app is being wiped",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "500" : {
+            "description" : "_No cmld_ if no container management layer is available"
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Wipes an app and all its data",
+        "tags" : [ "Applications" ]
+      }
+    },
+    "/certs/acme_renew/{target}" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getAcmeCert",
+        "parameters" : [ {
+          "name" : "target",
+          "in" : "path",
+          "description" : "Identifier of the component to renew. Currently, the only valid value is __webconsole__",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "boolean"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Starts ACME renewal over X509v3 certificates",
+        "tags" : [ "Identities and Certificates" ]
+      }
+    },
+    "/certs/acme_tos" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getAcmeTermsOfService",
+        "parameters" : [ {
+          "name" : "uri",
+          "in" : "query",
+          "description" : "URI to retrieve the TOS from",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/AcmeTermsOfService"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Retrieves the Terms of Service (tos) of the ACME endpoint",
+        "tags" : [ "Identities and Certificates" ]
+      }
+    },
+    "/certs/create_identity" : {
+      "post" : {
+        "consumes" : [ "application/json" ],
+        "operationId" : "createIdentity",
+        "parameters" : [ {
+          "description" : "Specification of the identity to create a key pair for",
+          "in" : "body",
+          "name" : "body",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Identity"
+          }
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "tags" : [ "Identities and Certificates" ]
+      }
+    },
+    "/certs/delete_cert" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "deleteCert",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Deletes a trusted certificate",
+        "tags" : [ "Identities and Certificates" ]
+      }
+    },
+    "/certs/delete_identity" : {
+      "post" : {
+        "description" : "",
+        "operationId" : "deleteIdentity",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Deletes a public/private key pair",
+        "tags" : [ "Identities and Certificates" ]
+      }
+    },
+    "/certs/install_trusted_cert" : {
+      "post" : {
+        "consumes" : [ "multipart/form-data" ],
+        "description" : "",
+        "operationId" : "installTrustedCert",
+        "parameters" : [ {
+          "name" : "attachment",
+          "in" : "formData",
+          "required" : false,
+          "type" : "file"
+        } ],
+        "produces" : [ "text/html" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Installs a new trusted public key certificate.",
+        "tags" : [ "Identities and Certificates" ]
+      }
+    },
+    "/certs/list_certs" : {
+      "get" : {
+        "description" : "Certificates in this list refer to public keys that are trusted by this connector.",
+        "operationId" : "listCerts",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "List of certificates",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/Cert"
+              },
+              "type" : "array"
+            }
+          },
+          "500" : {
+            "description" : "_Truststore not found_: If no trust store available"
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "List installed certificates from trust store.",
+        "tags" : [ "Identities and Certificates" ]
+      }
+    },
+    "/certs/list_identities" : {
+      "get" : {
+        "description" : "Certificates in this list refer to private keys that can be used as identities by the connector.",
+        "operationId" : "listIdentities",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/Cert"
+              },
+              "type" : "array"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "List installed certificates from the private key store.",
+        "tags" : [ "Identities and Certificates" ]
+      }
+    },
+    "/config/connectionConfigs" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getAllConnectionConfigurations",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Map of connections and configurations",
+            "schema" : {
+              "$ref" : "#/definitions/ConnectionSettings"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Retrieves configurations of all connections",
+        "tags" : [ "Connector Configuration" ]
+      }
+    },
+    "/config/connectionConfigs/{con}" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getConnectionConfigurations",
+        "parameters" : [ {
+          "name" : "con",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ConnectionSettings"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Sends configuration of a connection",
+        "tags" : [ "Connector Configuration" ]
+      },
+      "post" : {
+        "consumes" : [ "application/json" ],
+        "description" : "",
+        "operationId" : "setConnectionConfigurations",
+        "parameters" : [ {
+          "name" : "con",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "500" : {
+            "description" : "_No valid connection settings received!_: If incorrect connection settings parameter is provided"
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Save connection configuration of a particular connection",
+        "tags" : [ "Connector Configuration" ]
+      }
+    },
+    "/config/connectorConfig" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "get",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ConnectorConfig"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Retrieves the current configuration",
+        "tags" : [ "Connector Configuration" ]
+      },
+      "post" : {
+        "consumes" : [ "application/json" ],
+        "description" : "",
+        "operationId" : "set",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          },
+          "500" : {
+            "description" : "_No valid preferences received_: If incorrect configuration parameter is provided"
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Sets the overall configuration of the connector",
+        "tags" : [ "Connector Configuration" ]
+      }
+    },
+    "/connections/endpoints" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getAvailableEndpoints",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/IDSCPServerEndpoint"
+              },
+              "type" : "array"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Returns a list of all endpoints provided by this connector",
+        "tags" : [ "IDSCP Connections" ]
+      }
+    },
+    "/connections/incoming" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getIncoming",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/IDSCPIncomingConnection"
+              },
+              "type" : "array"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Returns a list of all inbound connections",
+        "tags" : [ "IDSCP Connections" ]
+      }
+    },
+    "/connections/outgoing" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getOutgoing",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/IDSCPOutgoingConnection"
+              },
+              "type" : "array"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Returns a list of all outbound connections",
+        "tags" : [ "IDSCP Connections" ]
+      }
+    },
+    "/metric/get" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getMetrics",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "Map of metrics values",
+            "schema" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Returns metrics values",
+        "tags" : [ "Runtime Metrics" ]
+      }
+    },
+    "/policies/install" : {
+      "post" : {
+        "consumes" : [ "multipart/form-data" ],
+        "description" : "",
+        "operationId" : "install",
+        "parameters" : [ {
+          "name" : "policy_description",
+          "in" : "formData",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "policy_file",
+          "in" : "formData",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "policy_name",
+          "in" : "formData",
+          "required" : false,
+          "type" : "string",
+          "default" : "default policy"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Installs a new usage control policy as a Prolog theory file",
+        "tags" : [ "Usage Control Policies" ]
+      }
+    },
+    "/policies/list" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "list",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "List of usage control rules",
+            "schema" : {
+              "items" : {
+                "items" : {
+                  "type" : "string"
+                },
+                "type" : "array"
+              },
+              "type" : "array"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Lists active usage control rules",
+        "tags" : [ "Usage Control Policies" ]
+      }
+    },
+    "/policies/policyProlog" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getPolicyProlog",
+        "produces" : [ "text/plain" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Returns the full usage control policy as a Prolog theory",
+        "tags" : [ "Usage Control Policies" ]
+      }
+    },
+    "/routes/add" : {
+      "put" : {
+        "consumes" : [ "text/plain" ],
+        "description" : "",
+        "operationId" : "addRoute",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Result"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Adds a new route, provided as Camel XML.",
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/routes/components" : {
+      "get" : {
+        "operationId" : "getComponents",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/RouteComponent"
+              },
+              "type" : "array"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/routes/get/{id}" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "get",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Route ID",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RouteObject"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Get a Camel route",
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/routes/getAsString/{id}" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getAsString",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "Route ID",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "produces" : [ "text/plain" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Gets an XML representation of a Camel route.",
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/routes/list" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "list",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "items" : {
+                "$ref" : "#/definitions/RouteObject"
+              },
+              "type" : "array"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Returns map from camel context to list of camel routes.",
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/routes/list_endpoints" : {
+      "get" : {
+        "operationId" : "listEndpoints",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "object",
+              "additionalProperties" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/routes/metrics" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getMetrics",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RouteMetrics"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Get aggregated runtime metrics of all routes",
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/routes/metrics/{id}" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getMetrics",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/RouteMetrics"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Get runtime metrics of a route",
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/routes/prolog/{routeId}" : {
+      "get" : {
+        "operationId" : "getRouteProlog",
+        "parameters" : [ {
+          "name" : "routeId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "produces" : [ "text/plain" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/routes/save/{id}" : {
+      "post" : {
+        "consumes" : [ "text/plain" ],
+        "description" : "",
+        "operationId" : "saveRoute",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Result"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Save changes to a route. ",
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/routes/startroute/{id}" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "startRoute",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Result"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Starts a Camel route. The route will start to process messages.",
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/routes/stoproute/{id}" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "stopRoute",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/Result"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Stops a Camel route. The route will remain installed but it will not process any messages.",
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/routes/validate/{routeId}" : {
+      "get" : {
+        "operationId" : "validate",
+        "parameters" : [ {
+          "name" : "routeId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ValidationInfo"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "tags" : [ "Message Routing" ]
+      }
+    },
+    "/settings/connectorProfile" : {
+      "get" : {
+        "description" : "",
+        "operationId" : "getConnectorProfile",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ConnectorProfile"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Returns this connector's self-description (\"Connector Profile\")",
+        "tags" : [ "Self-Description and Connector Profiles" ]
+      },
+      "post" : {
+        "consumes" : [ "application/json" ],
+        "description" : "",
+        "operationId" : "postConnectorProfile",
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "summary" : "Configure the connector's self-description (\"Connector Profile\").",
+        "tags" : [ "Self-Description and Connector Profiles" ]
+      }
+    },
+    "/settings/selfInformation" : {
+      "get" : {
+        "operationId" : "getSelfInformation",
+        "produces" : [ "application/ld+json" ],
+        "responses" : {
+          "200" : {
+            "description" : "successful operation",
+            "schema" : {
+              "type" : "string"
+            }
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "tags" : [ "Self-Description and Connector Profiles" ]
+      },
+      "post" : {
+        "consumes" : [ "application/ld+json" ],
+        "operationId" : "setSelfInformation",
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "tags" : [ "Self-Description and Connector Profiles" ]
+      },
+      "delete" : {
+        "consumes" : [ "application/ld+json" ],
+        "operationId" : "removeSelfInformation",
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        },
+        "security" : [ {
+          "oauth2" : [ ]
+        } ],
+        "tags" : [ "Self-Description and Connector Profiles" ]
+      }
+    },
+    "/user/login" : {
+      "post" : {
+        "consumes" : [ "application/json" ],
+        "operationId" : "authenticateUser",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        },
+        "tags" : [ "User Authentication" ]
+      }
+    },
+    "/user/removeUser" : {
+      "post" : {
+        "consumes" : [ "application/json" ],
+        "operationId" : "removeUser",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        },
+        "tags" : [ "User Authentication" ]
+      }
+    },
+    "/user/saveUser" : {
+      "post" : {
+        "consumes" : [ "application/json" ],
+        "operationId" : "addUser",
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "default" : {
+            "description" : "successful operation"
+          }
+        },
+        "tags" : [ "User Authentication" ]
+      }
+    }
+  },
+  "schemes" : [ "http" ],
+  "securityDefinitions" : {
+    "oauth2" : {
+      "flow" : "password",
+      "scopes" : {
+        "write:api" : "Read and write access to the API"
+      },
+      "tokenUrl" : "http://localhost:8080/cxf/api/v1/user/login",
+      "type" : "oauth2"
+    }
+  },
+  "swagger" : "2.0",
+  "tags" : [ {
+    "name" : "Applications"
+  }, {
+    "name" : "Connector Configuration"
+  }, {
+    "name" : "IDSCP Connections"
+  }, {
+    "name" : "Identities and Certificates"
+  }, {
+    "name" : "Message Routing"
+  }, {
+    "name" : "Runtime Metrics"
+  }, {
+    "name" : "Self-Description and Connector Profiles"
+  }, {
+    "name" : "Usage Control Policies"
+  }, {
+    "name" : "User Authentication"
+  } ]
+}

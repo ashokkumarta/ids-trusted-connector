@@ -28,4 +28,4 @@ WORKDIR "/root"
 # Ports to expose
 EXPOSE 8080 29292
 
-CMD ["java", "--class-path", "./jars/*", "de.fhg.aisec.ids.TrustedConnector"]
+CMD ["java", "-Dtrust_all_cert=true", "--class-path", "./jars/*", "de.fhg.aisec.ids.TrustedConnector"]

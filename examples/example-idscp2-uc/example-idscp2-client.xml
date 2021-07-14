@@ -50,6 +50,10 @@
             <setProperty name="artifactUri">
                 <constant>https://example.com/some_artifact</constant>
             </setProperty>
+            <log message="ArtifactResponseMessage headers\n\n${headers}"/>
+            <log message="ArtifactResponseMessage body\n\n${body}"/>
+            <to uri="http://echo-server:8080"/>
+            <log message="Response body\n\n${body}"/>
             <process ref="ArtifactRequestCreationProcessor" />
             <to uri="idscp2client://provider-core:29292?awaitResponse=true&amp;connectionShareId=ucConnection&amp;sslContextParameters=#clientSslContext&amp;useIdsMessages=true"/>
             <process ref="TypeExtractionProcessor"/>
@@ -57,6 +61,8 @@
                 <when>
                     <simple>${exchangeProperty.ids-type} == 'ArtifactResponseMessage'</simple>
                     <log message="### Handle ArtifactResponseMessage ###"/>
+                    <log message="ArtifactResponseMessage headers\n\n${headers}"/>
+                    <log message="ArtifactResponseMessage body\n\n${body}"/>
                     <to uri="http://echo-server:8080"/>
                     <log message="Response body\n\n${body}"/>
                 </when>

@@ -46,6 +46,9 @@
                     <simple>${exchangeProperty.ids-type} == 'ArtifactRequestMessage'</simple>
                     <log message="### Handle ArtifactRequestMessage ###"/>
                     <process ref="ArtifactRequestProcessor" />
+                    <log message="After ArtifactRequestProcessor headers\n\n${headers}"/>
+                    <log message="After ArtifactResponseMessage body\n\n${body}"/>
+                    
                 </when>
                 <otherwise>
                     <log loggingLevel="ERROR" message="### Server received unexpected message (otherwise branch):\n${body}\n### Header: ###\n${headers[idscp2-header]}"/>

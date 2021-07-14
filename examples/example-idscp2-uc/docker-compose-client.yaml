@@ -23,7 +23,7 @@ services:
       - provider-internal
 
   echo-server:
-    image: jmalloc/echo-server@sha256:c461e7e54d947a8777413aaf9c624b4ad1f1bac5d8272475da859ae82c1abd7d
+    image: jmalloc/echo-server
     networks:
       - provider-internal
 

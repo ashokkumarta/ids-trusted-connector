@@ -10,6 +10,8 @@ buildscript {
 
 repositories {
     mavenCentral()
+    mavenLocal()
+    
 }
 
 plugins {

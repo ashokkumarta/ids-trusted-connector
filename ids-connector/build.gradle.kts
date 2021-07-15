@@ -15,6 +15,12 @@ plugins {
     kotlin("plugin.spring")
 }
 
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+
 dependencies {
     api(project(":ids-api"))
     // api(project(":ids-acme"))
@@ -33,7 +39,12 @@ dependencies {
     implementation("org.apache.camel.springboot:camel-spring-boot-starter")
     implementation("org.apache.camel.springboot:camel-rest-starter")
     implementation("org.apache.camel.springboot:camel-http-starter")
-    implementation("de.fhg.aisec.ids", "camel-idscp2", libraryVersions["idscp2"])
+    implementation("de.fhg.aisec.ids", "camel-idscp2", libraryVersions["idscp2"]){
+        exclude ("de.fhg.aisec.ids:idscp2")
+    }
+    implementation("de.fhg.aisec.ids", "idscp2", libraryVersions["idscp2ex"])
+
+    implementation("ashok.ids.processors", "ids-processor", libraryVersions["ids-processor"]) 
 }
 
 // Clears library JARs before copying

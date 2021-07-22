@@ -1,5 +1,4 @@
 idscp2: "0.4.3"
-idscp2ex: "0.4.5-ex"
 ktlint: "0.41.0"
 
 # Pinning
@@ -102,4 +101,3 @@ javaxAnnotation: "1.3.2"
 springBoot: "2.4.5"
 bouncyCastle: "1.68"
 
-ids-processor: "0.1-SNAPSHOT"

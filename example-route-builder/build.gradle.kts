@@ -7,11 +7,6 @@ springBoot {
     mainClass.set("de.fhg.aisec.ids.ExampleConnector")
 }
 
-repositories {
-    mavenCentral()
-    mavenLocal()
-}
-
 dependencies {
     // Can and should be replaced by a reference to a maven published artifact later
     implementation(project(":ids-connector"))
